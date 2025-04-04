@@ -1,0 +1,27 @@
+
+int flexPin=A0;
+int ledPin=5;
+int buttonPin=2;
+bool start=false;
+void setup()
+{
+  pinMode(ledPin,OUTPUT);
+  pinMode(buttonPin,INPUT_PULLUP);
+  pinMode(flexPin,INPUT_PULLUP);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  Serial.println(analogRead(flexPin));
+  if (digitalRead(buttonPin)==LOW) {
+    start = !start;
+    Serial.println("pressed");
+    delay(500);
+  }
+  if (start && analogRead(flexPin)>1000) {
+    digitalWrite(ledPin,HIGH);
+    Serial.println("light");
+  }
+  else digitalWrite(ledPin,LOW);
+}
