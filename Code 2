@@ -1,0 +1,51 @@
+/***   Global variables   ***/
+int fotodiodo=0;
+int fototransistor=0;
+int val=0;
+
+/***   Function declaration   ***/
+
+/***   Class declaration   ***/
+
+/***   Tasks declaration   ***/
+
+/***   ISR function declaration   ***/
+
+/***   Additional Global variables   ***/
+
+void setup()
+{
+
+
+
+  pinMode(A1,INPUT);
+
+  pinMode(A0,INPUT);
+
+  Serial.begin(9600);
+
+  pinMode(3,OUTPUT);
+
+}
+
+
+void loop()
+{
+    fotodiodo=analogRead(A1);
+    fototransistor=analogRead(A0);
+    val=map(fototransistor,0,471,0,255);
+    Serial.println(fotodiodo);
+    Serial.println(fototransistor);
+    Serial.println(val);
+    if (fotodiodo >= 40) {
+      analogWrite(3,fotodiodo);
+     }else {
+      analogWrite(3,0);
+     }
+    if (fototransistor >= 235) {
+      analogWrite(3,val);
+     }else {
+      analogWrite(3,0);
+     }
+
+}
